@@ -1,0 +1,87 @@
+class solution{
+
+public static class Pair implements Comparable<Pair>{
+
+int node;
+int time;
+
+Pair(int x, int y){
+this.node = x;
+this.time = y;
+}
+
+ public int compareTo(Pair P){
+  return this.time-P.time;
+  }
+}
+
+public int Solve(int[][] ar , ArrayList<ArrayList<Integer> al , n , m){
+
+int time = Integer.MAX_VALUE;
+PriorityQueue<Pair> pq = new PriorityQueue<>();
+pq.add(new Pair(1,0));
+boolean[] visit = new boolean[n+1];
+
+while(pq.size()>0){
+
+Pair current = pq.remove();
+if(current.node == n) time = Math.min(time,current.time);
+
+ if(visit[current.node] == true)
+     continue;
+ visit[current.node] = true;
+
+for(int i = 1; i<=n; i++){
+
+if(ar[current.node][i]!=0){
+  if(al.get(i-1).contains(current.time + ar[current.node][i]))
+	pq.add(new Pair(i,current.time + ar[current.node][i] + 1));
+  else {pq.add(new Pair(i,current.time + ar[current.node][i]));
+       }   
+
+     }
+  }//end of for loop
+}//end of while
+	
+   return time;
+}//end of function
+
+public static void main(String[] args){
+
+//Taking the input
+  Scanner sc = new Scanner(System.in);
+  String S1 = sc.nextLine();
+  String[] Array1 = S1.split(" ");
+  int n = Integer.parseInt(String.valueOf(Array1[0]));
+  int m = Integer.parseInt(String.valueOf(Array1[1]));
+
+  int[][] mt = new int[n+1][n+1];
+
+//2D array for storing the time taken
+  for(int i = 1; i<=m; i++){
+
+  String S = sc.nextLine();
+  String[] Ar = S.split(" ");
+  mt[Integer.parseInt(String.valueOf(Ar[0]))][Integer.parseInt(String.valueOf(Ar[1]))] = Integer.parseInt(String.valueOf(Ar[2]));
+       }
+
+	ArrayList<ArrayList<Integer>> Patrol = new ArrayList<>();
+  
+//Creating the Adjacency List
+  for(int i = 1; i<=n, i++){
+
+  Patrol.add(new ArrayList<Integer>);
+  String S = sc.nextLine();
+  String[] Ar = S.split(" ");
+  for(int j = 0; j<Ar.length; j++){
+
+  Patrol.get(i-1).add(Integer.parseInt(String.valueOf(Ar[j])));
+}
+}
+
+//Calling the function
+int ans = Solve(mt , Patrol , n , m);
+System.out.println(ans);
+
+ }//end of main
+}//end of solution

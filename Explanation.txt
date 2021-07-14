@@ -1,0 +1,10 @@
+Explanation for Dr Strange v/s COVID-19-
+
+1- We use a 2D array to store the portals and the time taken.
+2- Patroling time for the portals are strored in an adjacency list(implemented using arraylist).
+3- We create a custom class "Pair" to strore the portal number and the time taken to reach the portal.
+4- Since we need to calculate the shortest time required to reach the final portal, we can use Dijsktra's Algorithm for this purpose.
+5- We implement the Dijsktra's algorithm using a Priority Queue.
+6- Before adding the pair to the Priority Queue, we check whether the Patroling adjacency list contains the time taken to reach the corresponding portal.
+7- If the time is present in the adjacency list, we add "1" to the time taken to reach the portal to accomodate for the hiding time and if it is absent, then we add the time as it is.
+8- After the algorithm is completed, we return the time required to reach the final portal as the answer.
